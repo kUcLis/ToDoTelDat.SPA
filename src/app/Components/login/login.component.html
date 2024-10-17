@@ -1,0 +1,34 @@
+<div class="loginbox">
+    <div class="card borderCard">
+        <div class="card-header bg-warning">
+            <div class="d-flex justify-content-between align-items-center">
+                <span>Logowanie</span>
+                <ng-container *ngIf="(auth.user$ | async) !== null">
+                    <button type="button" class="btn btn-light btn-sm" (click)="onLogout()">Zmień użytkownika</button>
+                </ng-container>
+            </div>
+        </div>
+        <div *ngIf="(auth.user$ | async) === null">
+            <div class="card-body pt-3 lead text-center">
+                <h5>Witaj w <strong>To Do</strong></h5>
+                <p class="card-text">Podaj swoją nazwę użytkownika.</p>
+            </div>
+            <form class="p-3" #loginForm="ngForm">
+                <div class="form-group lead">
+                    <label for="InputPass" class="p-1">Nazwa Użytkownika</label>
+                    <input ngModel name="userName" #password="ngModel" type="text" required
+                        [class.is-invalid]="password.touched && password.invalid" [(ngModel)]="userName"
+                        class="form-control" placeholder="Wpisz nazwę użytkownika. Min. 3 znaki, maksimum 30 znaków.">
+                    <small class="text-danger" *ngIf="password.touched && password.errors"> Podanie nazwy uzytkownika jest
+                        wymagane</small>
+                </div>
+                <div *ngIf="authError">
+                    <small class="text-danger">{{authError}}</small>
+                </div>
+                <div class="d-grid p-5">
+                    <button type="submit" (click)="onSubmit()" class="btn btn-warning"
+                        style="--bs-btn-color: #000;"><strong>Prześlij</strong></button>
+                </div>
+            </form>
+        </div>
+    </div>

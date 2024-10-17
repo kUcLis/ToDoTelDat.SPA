@@ -17,4 +17,8 @@ export class LoginComponent {
  onSubmit(){
     this.auth.logIn(this.userName);
  };
+
+ onLogout(){
+    this.auth.logOut();
+ }
 }

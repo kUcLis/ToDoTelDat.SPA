@@ -8,7 +8,7 @@ import { User } from '../Models/user';
 })
 export class AuthorizationService {
   user = new User();
-  private userStorage = new ReplaySubject<number | null>();
+  private userStorage = new ReplaySubject<User | null>();
   public user$ = this.userStorage.asObservable();
 
 
@@ -18,20 +18,33 @@ export class AuthorizationService {
       this.userEP.getByUserName(userName).subscribe({
         next: (data) => {
           this.user = data;
+          this.setUser(this.user);
         },
         error: (e) => {
          
         }
       });
 
-      if(!this.user.userId)
+      if(!this.user){
         this.userEP.createUser(userName).subscribe({
           next: (data) => {
             this.user = data;
+            this.setUser(this.user);
           },
           error: (e) => {
            
           }
         });
+      }
+  }
+
+  logOut(){
+    localStorage.removeItem('user');
+    this.userStorage.next(null);
+  }
+
+  private setUser(user : User){
+    localStorage.setItem('user',JSON.stringify(user));
+    this.userStorage.next(user);
   }
 }

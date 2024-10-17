@@ -1,0 +1,12 @@
+<div class="ysbox" *ngIf="(auth.user$ | async) != null">
+    <div class="card borderCard">
+        <div class="card-header bg-warning">
+            To Do - zadania
+        </div>
+    <div>
+        <div class="card-body pt-3 lead text-center">
+            <h5>Witaj <strong>{{(auth.user$ | async)?.userName}}</strong></h5>
+            <p class="card-text">To tak na szybko, żeby zobaczyć czy działa endpoint z autoryzacją</p>
+        </div>
+    </div>
+</div>

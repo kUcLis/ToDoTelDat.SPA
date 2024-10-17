@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthorizationService } from 'src/app/Shared/Services/authorization.service';
 
 @Component({
   selector: 'app-main-body',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class MainBodyComponent {
 
+  constructor(public auth: AuthorizationService){
+    
+  }
 }

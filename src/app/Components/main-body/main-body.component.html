@@ -1,0 +1,10 @@
+<div class="container-fluid mainBody justify-content-center">
+    <div class="row justify-content-center">
+        <div class="col-6 p-1">
+            <app-login></app-login>
+        </div>
+        <div class="col-12 p-1" *ngIf="(this.auth.user$ | async) != null">
+            <app-main-todoes ></app-main-todoes>
+        </div>
+    </div>
+</div>
