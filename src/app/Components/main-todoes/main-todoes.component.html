@@ -1,12 +1,31 @@
-<div class="ysbox" *ngIf="(auth.user$ | async) != null">
+<div class="borderCard" *ngIf="(auth.user$ | async) != null">
     <div class="card borderCard">
         <div class="card-header bg-warning">
             To Do - zadania
         </div>
-    <div>
-        <div class="card-body pt-3 lead text-center">
-            <h5>Witaj <strong>{{(auth.user$ | async)?.userName}}</strong></h5>
-            <p class="card-text">To tak na szybko, żeby zobaczyć czy działa endpoint z autoryzacją</p>
+        <div>
+            <div class="card-body pt-3 lead text-center">
+                <div class="grid">
+                    <div class="row justify-content-center">
+                        <div class="col-4">
+                            <div class="d-block border-end">
+                                <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"
+                                    (dateSelect)="onDateSelect()" />
+                                <button type="button" class="mt-2 btn btn-warning btn-lg" (click)="addTask()"> + Dodaj
+                                    zadanie</button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <ng-container *ngIf="toDoes.length > 0">
+                                <app-todo></app-todo>
+                            </ng-container>
+                            <ng-container *ngIf="toDoes.length == 0">
+                                Brak zadań na dzień {{model.day}}-{{model.month}}-{{model.year}}
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,52 @@
+<div class="borderCard" *ngIf="(auth.user$ | async) != null">
+    <div class="card borderCard">
+        <div class="card-header bg-warning">
+            Dodaj Zadanie
+        </div>
+        <div>
+            <div class="card-body pt-3 lead text-center">
+                <div class="grid">
+                    <div class="row justify-content-center">
+                        <div class="col-5">
+                            <div class="d-block justify-content-center border-end">
+                                <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"
+                                    (dateSelect)="onDateSelect()" />
+                                <div class="d-flex justify-content-center">
+                                    <ngb-timepicker class="pt-2" [ngModel]="time"
+                                        (ngModelChange)="onTimeChange($event)" />
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="d-block">
+                                    <input type="text" class="form-control form-control-lg p-1 mx-2" pInputText
+                                        i18n-placeholder [(ngModel)]="formDate" name="date" placeholder="Wybierz datę"
+                                        [class.is-invalid]="(!isDateValid)"
+                                        disabled>
+                                    <div *ngIf="!isDateValid" id="" class="invalid-feedback">
+                                        Data nie może być w przeszłości.
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="mb-3">
+                                <label for="taskname" class="form-label">Nazwa zadania:</label>
+                                <textarea type="text" [(ngModel)]="toDo.taskName" class="form-control" placeholder="Maksimum 100 znaków."
+                                [class.is-invalid]="(!isTaskNameValid)"></textarea>
+                              </div>
+                              <div *ngIf="!isTaskNameValid" id="" class="invalid-feedback">
+                                Minimum 3 znaki. Maksimum 100 znaków.
+                            </div>
+                              <div class="mb-3">
+                                <label for="description" class="form-label">Opis:</label>
+                                <textarea class="form-control" [(ngModel)]="toDo.description" rows="9" placeholder="Opis zadania"></textarea>
+                              </div>
+                        </div>
+                        <button type="button" class="mt-2 btn btn-warning btn-lg" (click)="onSubmit()"> + Dodaj
+                            zadanie</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

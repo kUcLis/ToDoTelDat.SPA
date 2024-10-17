@@ -4,7 +4,11 @@
             <div class="d-flex justify-content-between align-items-center">
                 <span>Logowanie</span>
                 <ng-container *ngIf="(auth.user$ | async) !== null">
-                    <button type="button" class="btn btn-light btn-sm" (click)="onLogout()">Zmień użytkownika</button>
+                        <span>
+                            Witaj <strong>{{(auth.user$ | async)?.userName}} </strong>
+                        </span>
+                        <button type="button" class="btn btn-light btn-sm" (click)="onLogout()">Zmień
+                            użytkownika</button>
                 </ng-container>
             </div>
         </div>
@@ -18,14 +22,15 @@
                     <label for="InputPass" class="p-1">Nazwa Użytkownika</label>
                     <input ngModel name="userName" #password="ngModel" type="text" required
                         [class.is-invalid]="password.touched && password.invalid" [(ngModel)]="userName"
-                        class="form-control" placeholder="Wpisz nazwę użytkownika. Min. 3 znaki, maksimum 30 znaków.">
-                    <small class="text-danger" *ngIf="password.touched && password.errors"> Podanie nazwy uzytkownika jest
+                        class="form-control" placeholder="Nazwa użytkownika. Min. 3 znaki, maksimum 30 znaków.">
+                    <small class="text-danger" *ngIf="password.touched && password.errors"> Podanie nazwy uzytkownika
+                        jest
                         wymagane</small>
                 </div>
                 <div *ngIf="authError">
                     <small class="text-danger">{{authError}}</small>
                 </div>
-                <div class="d-grid p-5">
+                <div class="d-grid p-4">
                     <button type="submit" (click)="onSubmit()" class="btn btn-warning"
                         style="--bs-btn-color: #000;"><strong>Prześlij</strong></button>
                 </div>
