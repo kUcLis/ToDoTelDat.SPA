@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ToDoTeldatWeb.SPA", "ToDoTeldatWeb.SPA\ToDoTeldatWeb.SPA.esproj", "{ECA2A8DF-E712-4A35-B375-486DDF38389A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECA2A8DF-E712-4A35-B375-486DDF38389A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECA2A8DF-E712-4A35-B375-486DDF38389A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECA2A8DF-E712-4A35-B375-486DDF38389A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ECA2A8DF-E712-4A35-B375-486DDF38389A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECA2A8DF-E712-4A35-B375-486DDF38389A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECA2A8DF-E712-4A35-B375-486DDF38389A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54EA6A5D-F7EC-41F2-B422-CF422E6B9C35}
+	EndGlobalSection
+EndGlobal
