@@ -7,4 +7,9 @@
     <!-- Folder where production build objects will be placed -->
     <PublishAssetsDirectory>$(MSBuildProjectDirectory)\dist\ToDoTeldatWeb.SPA\</PublishAssetsDirectory>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\app\Components\" />
+    <Folder Include="src\app\Shared\Models\" />
+    <Folder Include="src\app\Shared\Services\" />
+  </ItemGroup>
 </Project>
