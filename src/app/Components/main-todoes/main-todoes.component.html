@@ -17,6 +17,13 @@
                         </div>
                         <div class="col-8">
                             <ng-container *ngIf="toDoes.length > 0">
+                                <div class="accordion" id="accordionFlushExample">
+                                    <ng-container *ngIf="!isLoading">
+                                        <ng-container *ngFor="let todo of toDoes">
+                                            <app-todo [toDo]="todo"></app-todo>
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
                                 <app-todo></app-todo>
                             </ng-container>
                             <ng-container *ngIf="toDoes.length == 0">
