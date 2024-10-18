@@ -9,8 +9,10 @@
                     <div class="row justify-content-center">
                         <div class="col-4">
                             <div class="d-block border-end">
-                                <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"
-                                    (dateSelect)="onDateSelect()" />
+                                <div>
+                                    <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"
+                                    (dateSelect)="onDateSelect()" [disabled]="isFormOn"/>
+                                </div>
                                 <button type="button" [disabled]="isFormOn" class="mt-2 btn btn-warning btn-lg" (click)="addTask()"> + Dodaj
                                     zadanie</button>
                             </div>

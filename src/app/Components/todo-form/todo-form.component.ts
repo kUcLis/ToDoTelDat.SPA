@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, EventEmitter, inject, Inject, Input, LOCALE_ID, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Inject, Input, LOCALE_ID, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbCalendar, NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToDo } from 'src/app/Shared/Models/toDo';
 import { AuthorizationService } from 'src/app/Shared/Services/authorization.service';
@@ -11,7 +11,7 @@ import { TodoEndpointsService } from 'src/app/Shared/Services/todo-endpoints.ser
   templateUrl: './todo-form.component.html',
   styleUrls: ['./todo-form.component.css']
 })
-export class TodoFormComponent implements OnInit {
+export class TodoFormComponent implements OnInit, OnDestroy {
   @Input() toDo: ToDo;
   @Output() closeForm = new EventEmitter();
   @Input() model: NgbDateStruct;
@@ -19,7 +19,7 @@ export class TodoFormComponent implements OnInit {
   date: { year: number; month: number };
   currentDate = new Date();
   formDate: string = "";
-
+  isLoading = false;
   isDateValid = true;
   isTaskNameValid = true;
 
@@ -27,6 +27,9 @@ export class TodoFormComponent implements OnInit {
 
     this.model = inject(NgbCalendar).getToday();
     
+  }
+  ngOnDestroy(): void {
+    this.closeForm.emit()
   }
   ngOnInit(): void {
     console.log(this.toDo)
@@ -44,11 +47,13 @@ export class TodoFormComponent implements OnInit {
       this.model.year = this.toDo.startDate.getFullYear();
       this.time.hour = this.toDo.startDate.getHours();
       this.time.minute = this.toDo.startDate.getMinutes();
+      this.onTimeChange(this.time as NgbTimeStruct)
       this.onDateSelect();
     }
   }
 
   onSubmit() {
+    this.isLoading = true;
     console.log(this.toDo)
     if (!this.toDo.taskName || this.toDo.taskName!.length < 4 || this.toDo.taskName!.length > 100) {
       this.isTaskNameValid = false;
@@ -63,16 +68,19 @@ export class TodoFormComponent implements OnInit {
         next: (data) => {
           this.toDo = data;
           this.stateService.setRefresh();
+          this.isLoading = false;
           this.closeForm.emit();
         },
         error: (e) => {
           this.stateService.setRefresh();
+          this.isLoading = false;
         }
       });
     }
   }
 
   onSubmitUpdate() {
+    this.isLoading = true;
     console.log(this.toDo)
     if (!this.toDo.taskName || this.toDo.taskName!.length < 4 || this.toDo.taskName!.length > 100) {
       this.isTaskNameValid = false;
@@ -83,14 +91,17 @@ export class TodoFormComponent implements OnInit {
     if (this.isDateValid && this.isTaskNameValid) {
 
       this.auth.user$.subscribe(data => this.toDo.userId = data?.userId);
+      this.toDo.startDate!.setHours(this.toDo.startDate!.getHours() + 2 - 2)
       this.toDoEP.updateToDo(this.toDo).subscribe({
         next: (data) => {
           this.toDo = data;
           this.stateService.setRefresh();
           this.closeForm.emit();
+          this.isLoading = false;
         },
         error: (e) => {
           this.stateService.setRefresh();
+          this.isLoading = false;
         }
       });
     }
@@ -118,7 +129,7 @@ export class TodoFormComponent implements OnInit {
     }
 
 
-    this.formDate = formatDate(this.toDo.startDate!, 'dd-M-yyyy HH:mm', this.locale);
+    this.formDate = formatDate(this.toDo.startDate!, 'dd-MM-yyyy HH:mm', this.locale);
   }
   onDateSelect() {
     console.log(this.model)

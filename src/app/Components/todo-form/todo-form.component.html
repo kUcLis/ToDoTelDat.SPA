@@ -14,10 +14,10 @@
                         <div class="col-5">
                             <div class="d-block justify-content-center border-end">
                                 <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"
-                                    (dateSelect)="onDateSelect()" />
+                                    (dateSelect)="onDateSelect()" [disabled]="isLoading" />
                                 <div class="d-flex justify-content-center">
                                     <ngb-timepicker class="pt-2" [ngModel]="time"
-                                        (ngModelChange)="onTimeChange($event)" />
+                                        (ngModelChange)="onTimeChange($event)" [disabled]="isLoading"  />
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <div class="d-block">
@@ -36,7 +36,7 @@
                                 <label for="taskname" class="form-label">Nazwa zadania:</label>
                                 <textarea type="text" [(ngModel)]="toDo.taskName" class="form-control"
                                     placeholder="Maksimum 100 znaków."
-                                    [class.is-invalid]="(!isTaskNameValid)"></textarea>
+                                    [class.is-invalid]="(!isTaskNameValid)" [disabled]="isLoading" ></textarea>
                             </div>
                             <div *ngIf="!isTaskNameValid" id="" class="invalid-feedback">
                                 Minimum 3 znaki. Maksimum 100 znaków.
@@ -44,12 +44,12 @@
                             <div class="mb-3">
                                 <label for="description" class="form-label">Opis:</label>
                                 <textarea class="form-control" [(ngModel)]="toDo.description" rows="9"
-                                    placeholder="Opis zadania"></textarea>
+                                    placeholder="Opis zadania" [disabled]="isLoading" ></textarea>
                             </div>
                         </div>
-                        <button *ngIf="!toDo.toDoId" type="button" class="mt-2 btn btn-warning btn-lg" (click)="onSubmit()"> + Dodaj
+                        <button *ngIf="!toDo.toDoId" type="button" class="mt-2 btn btn-warning btn-lg" (click)="onSubmit()" [disabled]="isLoading" > + Dodaj
                             zadanie</button>
-                        <button *ngIf="toDo.toDoId" type="button" class="mt-2 btn btn-warning btn-lg" (click)="onSubmitUpdate()"> Edytuj
+                        <button *ngIf="toDo.toDoId" type="button" class="mt-2 btn btn-warning btn-lg" (click)="onSubmitUpdate()" [disabled]="isLoading" > Edytuj
                             zadanie</button>
                     </div>
                 </div>
