@@ -1,7 +1,7 @@
 <div class="container-fluid mainBody justify-content-center">
     <div class="row justify-content-center">
         <div class="col-6 p-1">
-            <app-login></app-login>
+            <app-login (closeAll)="closeAll()"></app-login>
         </div>
         <div class="col-12 p-1" *ngIf="(this.auth.user$ | async) != null">
             <app-main-todoes (showForm)="showForm($event)" (updateModel)="updateModel($event)"></app-main-todoes>

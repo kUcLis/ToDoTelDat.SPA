@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthorizationService } from 'src/app/Shared/Services/authorization.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { AuthorizationService } from 'src/app/Shared/Services/authorization.serv
 export class LoginComponent {
   isLoading = false;
   isValid = true;
+  @Output() closeAll = new EventEmitter();
   userName = "";
   constructor(public auth: AuthorizationService){
     
@@ -33,5 +34,6 @@ export class LoginComponent {
  onLogout(){
     this.auth.logOut();
     this.isLoading = false;
+    this.closeAll.emit();
  }
 }

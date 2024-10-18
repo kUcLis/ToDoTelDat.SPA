@@ -29,4 +29,8 @@ export class MainBodyComponent {
     this.stateService.setFormState(false);
     this.form = false;
   }
+
+  closeAll(){
+    this.form = false;
+  }
 }

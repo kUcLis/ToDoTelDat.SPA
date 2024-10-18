@@ -85,7 +85,7 @@ export class TodoFormComponent implements OnInit, OnDestroy {
     console.log(this.toDo)
     if (!this.toDo.taskName || this.toDo.taskName!.length < 4 || this.toDo.taskName!.length > 100) {
       this.isTaskNameValid = false;
-      this.isLoading = false;
+      this.isLoading = false; 
     } else {
       this.isTaskNameValid = true;
     }
@@ -93,7 +93,6 @@ export class TodoFormComponent implements OnInit, OnDestroy {
     if (this.isDateValid && this.isTaskNameValid) {
 
       this.auth.user$.subscribe(data => this.toDo.userId = data?.userId);
-      this.toDo.startDate!.setHours(this.toDo.startDate!.getHours() + 2 - 2)
       this.toDoEP.updateToDo(this.toDo).subscribe({
         next: (data) => {
           this.toDo = data;
@@ -134,9 +133,7 @@ export class TodoFormComponent implements OnInit, OnDestroy {
     this.formDate = formatDate(this.toDo.startDate!, 'dd-MM-yyyy HH:mm', this.locale);
   }
   onDateSelect() {
-    console.log(this.model)
     this.toDo.startDate!.setFullYear(this.model.year, this.model.month - 1, this.model.day);
-    console.log(this.toDo.startDate)
     this.showFormDate();
   }
 }
