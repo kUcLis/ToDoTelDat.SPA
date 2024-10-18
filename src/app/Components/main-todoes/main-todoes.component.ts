@@ -59,6 +59,7 @@ export class MainTodoesComponent implements OnInit, AfterViewInit {
       error: e =>{
         console.log(this.toDoes)
         this.toDoes = [];
+        this.isLoading = false;
       }
     })
   }

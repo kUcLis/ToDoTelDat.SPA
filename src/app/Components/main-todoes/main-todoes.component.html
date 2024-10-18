@@ -11,13 +11,20 @@
                             <div class="d-block border-end">
                                 <div>
                                     <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"
-                                    (dateSelect)="onDateSelect()" [disabled]="isFormOn"/>
+                                    (dateSelect)="onDateSelect()" [disabled]="isFormOn || isLoading"/>
                                 </div>
-                                <button type="button" [disabled]="isFormOn" class="mt-2 btn btn-warning btn-lg" (click)="addTask()"> + Dodaj
+                                <button type="button" [disabled]="isFormOn || isLoading" class="mt-2 btn btn-warning btn-lg" (click)="addTask()"> + Dodaj
                                     zadanie</button>
                             </div>
                         </div>
                         <div class="col-8">
+                            <ng-container *ngIf="isLoading">
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border text-info" role="status" *ngIf="isLoading">
+                                        <span class=""> </span>
+                                    </div>
+                                </div>
+                            </ng-container>
                             <ng-container *ngIf="toDoes.length > 0 && !isLoading">
                                 <ol class="list-group">
                                     <ng-container *ngFor="let todo of toDoes">
@@ -25,7 +32,7 @@
                                     </ng-container>
                                 </ol>
                             </ng-container>
-                            <ng-container *ngIf="toDoes.length === 0">
+                            <ng-container *ngIf="toDoes.length === 0  && !isLoading">
                                 Brak zadań na dzień {{listDateFormat(dateFromModel)}}
                             </ng-container>
                         </div>
