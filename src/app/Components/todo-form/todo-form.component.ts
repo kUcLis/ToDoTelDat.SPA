@@ -57,6 +57,7 @@ export class TodoFormComponent implements OnInit, OnDestroy {
     console.log(this.toDo)
     if (!this.toDo.taskName || this.toDo.taskName!.length < 4 || this.toDo.taskName!.length > 100) {
       this.isTaskNameValid = false;
+      this.isLoading = false;
     } else {
       this.isTaskNameValid = true;
     }
@@ -84,6 +85,7 @@ export class TodoFormComponent implements OnInit, OnDestroy {
     console.log(this.toDo)
     if (!this.toDo.taskName || this.toDo.taskName!.length < 4 || this.toDo.taskName!.length > 100) {
       this.isTaskNameValid = false;
+      this.isLoading = false;
     } else {
       this.isTaskNameValid = true;
     }
