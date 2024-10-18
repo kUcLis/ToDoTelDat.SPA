@@ -96,6 +96,10 @@ export class TodoFormComponent implements OnInit {
     }
   }
 
+  onClose(){
+    this.closeForm.emit();
+  }
+
 
   onTimeChange(event: NgbTimeStruct) {
     this.time.hour = event.hour;
