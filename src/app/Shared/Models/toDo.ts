@@ -4,4 +4,6 @@ export class ToDo{
     public description?: string
     public startDate?: Date
     public userId?: number
+    public isDisabled?: boolean
+    public turnAlarm?: boolean
 }

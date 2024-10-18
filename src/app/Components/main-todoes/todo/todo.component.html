@@ -1,12 +1,24 @@
-<div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        <div class="d-flex justify-content-end">
-            <span><strong>{{toDo.taskName}}</strong></span> <span>{{formatedDate}}</span>
-        </div>
-      </button>
-    </h2>
-    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">
+<li class="list-group-item align-items-start">
+  <div class="grid">
+    <div class="row">
+      <div class="col-7 d-flex justify-content-start">
+        <div class="fw-bold">{{toDo.taskName}}</div>
+      </div>
+      <div class="col-4 d-flex justify-content-end">
+          <span class="p-2">{{formatedDate}} </span>
+      </div>
+      <div class="col-1">
+        <span *ngIf="toDo.turnAlarm" class="badge text-bg-danger rounded-pill">!</span>
+      </div>
     </div>
-</div>
+    <div class="row">
+      <div class="col-7 d-flex justify-content-start">
+        {{toDo.description}}
+      </div>
+      <div class="col-5 d-flex justify-content-end">
+        <button type="button" [disabled]="toDo.isDisabled || isFormOn" class="btn btn-info btn-sm mx-1" (click)="onUpdate()">Edytuj</button>
+        <button type="button" [disabled]="isFormOn" class="btn btn-danger btn-sm" (click)="onDelete()">Usuń</button>
+      </div>
+    </div>
+  </div>
+</li>

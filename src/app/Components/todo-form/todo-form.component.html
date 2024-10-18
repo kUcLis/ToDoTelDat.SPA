@@ -1,7 +1,11 @@
 <div class="borderCard" *ngIf="(auth.user$ | async) != null">
     <div class="card borderCard">
         <div class="card-header bg-warning">
-            Dodaj Zadanie
+            <div class="d-flex justify-content-between">
+                <span>Dodaj Zadanie</span>
+                <button type="button" class="btn-close" aria-label="Close"></button>
+            </div>
+            
         </div>
         <div>
             <div class="card-body pt-3 lead text-center">
@@ -17,32 +21,35 @@
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <div class="d-block">
-                                    <input type="text" class="form-control form-control-lg p-1 mx-2" pInputText
-                                        i18n-placeholder [(ngModel)]="formDate" name="date" placeholder="Wybierz datę"
-                                        [class.is-invalid]="(!isDateValid)"
-                                        disabled>
-                                    <div *ngIf="!isDateValid" id="" class="invalid-feedback">
-                                        Data nie może być w przeszłości.
+                                        <input type="text" class="form-control form-control-lg p-1 mx-2" pInputText
+                                            i18n-placeholder [(ngModel)]="formDate" name="date"
+                                            placeholder="Wybierz datę" [class.is-invalid]="(!isDateValid)" disabled>
+                                        <div *ngIf="!isDateValid" id="" class="invalid-feedback">
+                                            Data nie może być w przeszłości.
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-7">
                             <div class="mb-3">
                                 <label for="taskname" class="form-label">Nazwa zadania:</label>
-                                <textarea type="text" [(ngModel)]="toDo.taskName" class="form-control" placeholder="Maksimum 100 znaków."
-                                [class.is-invalid]="(!isTaskNameValid)"></textarea>
-                              </div>
-                              <div *ngIf="!isTaskNameValid" id="" class="invalid-feedback">
+                                <textarea type="text" [(ngModel)]="toDo.taskName" class="form-control"
+                                    placeholder="Maksimum 100 znaków."
+                                    [class.is-invalid]="(!isTaskNameValid)"></textarea>
+                            </div>
+                            <div *ngIf="!isTaskNameValid" id="" class="invalid-feedback">
                                 Minimum 3 znaki. Maksimum 100 znaków.
                             </div>
-                              <div class="mb-3">
+                            <div class="mb-3">
                                 <label for="description" class="form-label">Opis:</label>
-                                <textarea class="form-control" [(ngModel)]="toDo.description" rows="9" placeholder="Opis zadania"></textarea>
-                              </div>
+                                <textarea class="form-control" [(ngModel)]="toDo.description" rows="9"
+                                    placeholder="Opis zadania"></textarea>
+                            </div>
                         </div>
-                        <button type="button" class="mt-2 btn btn-warning btn-lg" (click)="onSubmit()"> + Dodaj
+                        <button *ngIf="!toDo.toDoId" type="button" class="mt-2 btn btn-warning btn-lg" (click)="onSubmit()"> + Dodaj
+                            zadanie</button>
+                        <button *ngIf="toDo.toDoId" type="button" class="mt-2 btn btn-warning btn-lg" (click)="onSubmitUpdate()"> Edytuj
                             zadanie</button>
                     </div>
                 </div>

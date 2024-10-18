@@ -7,18 +7,31 @@ import { AuthorizationService } from 'src/app/Shared/Services/authorization.serv
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
+  isLoading = false;
+  isValid = true;
   userName = "";
-  authError = "";
   constructor(public auth: AuthorizationService){
     
  }
 
  onSubmit(){
-    this.auth.logIn(this.userName);
+    this.isLoading = true;
+
+   if(this.userName.length < 3 || this.userName.length > 30){
+      this.isValid = false;
+      this.isLoading = false;
+   } else{
+      this.isValid = true;
+   }
+
+   if(this.isValid){
+      this.auth.logIn(this.userName);
+   }
+    
  };
 
  onLogout(){
     this.auth.logOut();
+    this.isLoading = false;
  }
 }

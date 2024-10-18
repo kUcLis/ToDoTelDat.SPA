@@ -11,23 +11,20 @@
                             <div class="d-block border-end">
                                 <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"
                                     (dateSelect)="onDateSelect()" />
-                                <button type="button" class="mt-2 btn btn-warning btn-lg" (click)="addTask()"> + Dodaj
+                                <button type="button" [disabled]="isFormOn" class="mt-2 btn btn-warning btn-lg" (click)="addTask()"> + Dodaj
                                     zadanie</button>
                             </div>
                         </div>
                         <div class="col-8">
-                            <ng-container *ngIf="toDoes.length > 0">
-                                <div class="accordion" id="accordionFlushExample">
-                                    <ng-container *ngIf="!isLoading">
-                                        <ng-container *ngFor="let todo of toDoes">
-                                            <app-todo [toDo]="todo"></app-todo>
-                                        </ng-container>
+                            <ng-container *ngIf="toDoes.length > 0 && !isLoading">
+                                <ol class="list-group">
+                                    <ng-container *ngFor="let todo of toDoes">
+                                        <app-todo [toDo]="todo" (toDoToUpdate)="openFormToUpdate($event)" (toDoToDelete)="onDelete($event)"></app-todo>
                                     </ng-container>
-                                </div>
-                                <app-todo></app-todo>
+                                </ol>
                             </ng-container>
-                            <ng-container *ngIf="toDoes.length == 0">
-                                Brak zadań na dzień {{model.day}}-{{model.month}}-{{model.year}}
+                            <ng-container *ngIf="toDoes.length === 0">
+                                Brak zadań na dzień {{listDateFormat(dateFromModel)}}
                             </ng-container>
                         </div>
                     </div>

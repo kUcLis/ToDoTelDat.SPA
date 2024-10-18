@@ -4,10 +4,10 @@
             <app-login></app-login>
         </div>
         <div class="col-12 p-1" *ngIf="(this.auth.user$ | async) != null">
-            <app-main-todoes (showForm)="showForm($event)"></app-main-todoes>
+            <app-main-todoes (showForm)="showForm($event)" (updateModel)="updateModel($event)"></app-main-todoes>
         </div>
         <div class="col-12 p-1" *ngIf="form">
-            <app-todo-form [toDo]="toDo" (closeForm)="hideForm()"></app-todo-form>
+            <app-todo-form [model]="model" [toDo]="toDo" (closeForm)="hideForm()"></app-todo-form>
         </div>
 
     </div>

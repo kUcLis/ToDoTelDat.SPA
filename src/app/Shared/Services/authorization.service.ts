@@ -21,21 +21,17 @@ export class AuthorizationService {
           this.setUser(this.user);
         },
         error: (e) => {
-         
+          this.userEP.createUser(userName).subscribe({
+            next: (data) => {
+              this.user = data;
+              this.setUser(this.user);
+            },
+            error: (e) => {
+             
+            }
+          });
         }
       });
-
-      if(!this.user){
-        this.userEP.createUser(userName).subscribe({
-          next: (data) => {
-            this.user = data;
-            this.setUser(this.user);
-          },
-          error: (e) => {
-           
-          }
-        });
-      }
   }
 
   logOut(){
@@ -47,4 +43,6 @@ export class AuthorizationService {
     localStorage.setItem('user',JSON.stringify(user));
     this.userStorage.next(user);
   }
+
+  
 }

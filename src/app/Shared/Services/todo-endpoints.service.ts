@@ -10,10 +10,18 @@ export class TodoEndpointsService {
   constructor(private http: HttpClient) { }
 
   createToDo(toDo: ToDo){
-    return this.http.post<ToDo>(this.baseUrl, toDo);
+    return this.http.post<ToDo>(this.baseUrl, toDo); 
   }
 
   getToDoes(date: string, userId: number){
     return this.http.get<ToDo[]>(this.baseUrl + "/" + userId + "/" + date)
+  }
+
+  updateToDo(toDo: ToDo){
+    return this.http.put<ToDo>(this.baseUrl, toDo);
+  }
+
+  deleteToDo(toDoId: number, userId: number){
+    return this.http.delete<boolean>(this.baseUrl + "/" + userId + "/" + toDoId)
   }
 }
