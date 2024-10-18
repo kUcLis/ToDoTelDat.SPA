@@ -24,7 +24,7 @@
                     <label for="InputPass" class="p-1">Nazwa Użytkownika</label>
                     <input ngModel name="userName" #password="ngModel" type="text" required
                         [class.is-invalid]="!isValid" [(ngModel)]="userName" class="form-control"
-                        placeholder="Nazwa użytkownika. Min. 3 znaki, maksimum 30 znaków.">
+                        placeholder="Nazwa użytkownika. Min. 3 znaki, maksimum 30 znaków." [disabled]="isLoading">
                     <small class="text-danger" *ngIf="!isValid"> Podanie nazwy uzytkownika
                         jest
                         wymagane. Min. 3 znaki, Max. 30 znaków.</small>
